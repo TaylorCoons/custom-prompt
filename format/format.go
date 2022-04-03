@@ -39,17 +39,3 @@ func Ellipse(text string, length int) string {
 	}
 	return text
 }
-
-func SurroundWith(text string, open string, close string) string {
-	if len(text) != 0 {
-		text = open + text + close
-	}
-	return text
-}
-
-func AppendWith(text string, postfix string) string {
-	if len(text) != 0 {
-		text = text + postfix
-	}
-	return text
-}

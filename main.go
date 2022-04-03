@@ -25,10 +25,8 @@ type PromptOpts struct {
 // Add default ps1 params (\u, \h, \w, etc...)
 
 var funcMap = template.FuncMap{
-	"surroundWith": format.SurroundWith,
-	"appendWith":   format.AppendWith,
-	"ellipse":      format.Ellipse,
-	"format":       format.FormatChar,
+	"ellipse": format.Ellipse,
+	"format":  format.FormatChar,
 }
 
 func main() {
