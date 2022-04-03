@@ -43,13 +43,13 @@ func main() {
 	opts.Venv = new(venv.Venv)
 	opts.Venv.Initialize()
 
-	paths := []string{
-		"/home/taylor/code/custom-prompt/prompts/ubuntu/ps1.tmpl",
-		"/home/taylor/code/custom-prompt/prompts/ubuntu/branch.tmpl",
-		"/home/taylor/code/custom-prompt/prompts/ubuntu/venv.tmpl",
-	}
+	// paths := []string{
+	// 	"/home/taylor/code/custom-prompt/prompts/ubuntu/ps1.tmpl",
+	// 	"/home/taylor/code/custom-prompt/prompts/ubuntu/branch.tmpl",
+	// 	"/home/taylor/code/custom-prompt/prompts/ubuntu/venv.tmpl",
+	// }
 	// t := template.Must(template.ParseFiles(paths...)).Funcs(funcMap)
-	t, err := template.New("ps1.tmpl").Funcs(funcMap).ParseFiles(paths...)
+	t, err := template.New("ps1.tmpl").Funcs(funcMap).ParseGlob("/home/taylor/code/custom-prompt/prompts/kali/*")
 	if err != nil {
 		panic(err)
 	}
