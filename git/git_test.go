@@ -2,36 +2,27 @@ package git
 
 import (
 	"bytes"
+	"fmt"
 	"os/exec"
+	"strings"
 	"testing"
 )
 
 func TestGetBranch(t *testing.T) {
-	expected := "temp-test-branch"
 	var out bytes.Buffer
 	cmd := exec.Command("git", "branch", "--show-current")
-	cmd.Stderr = &out
+	cmd.Stdout = &out
 	err := cmd.Run()
 	if err != nil {
 		t.Error("failed to get current branch")
+		t.Error(err)
 	}
-	current := out.String()
-	cmd = exec.Command("git", "checkout", "-b", expected)
 
-	err = cmd.Run()
-
-	if err != nil {
-		t.Error("failed to checkout test branch")
-	}
+	expected := strings.Trim(out.String(), "\n")
+	fmt.Println(expected)
 
 	actual := getBranch()
 	if actual != expected {
-		t.Errorf("got %s, want: %s", actual, expected)
-	}
-	cmd = exec.Command("git", "checkout", current)
-	err = cmd.Run()
-
-	if err != nil {
-		t.Error("failed to checkout current branch")
+		t.Errorf("got: %s, want: %s", actual, expected)
 	}
 }

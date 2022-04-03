@@ -6,12 +6,18 @@ import (
 )
 
 func (v *Venv) Initialize() {
-	venv_path := os.Getenv("VIRTUAL_ENV")
-	if len(venv_path) > 0 {
-		v.Env = filepath.Base(venv_path)
-		v.Active = true
-	} else {
-		v.Env = ""
-		v.Active = false
+	v.Env = getVenv()
+	v.Active = isVenvActive(v.Env)
+}
+
+func getVenv() string {
+	venvPath := os.Getenv("VIRTUAL_ENV")
+	if len(venvPath) > 0 {
+		return filepath.Base(venvPath)
 	}
+	return ""
+}
+
+func isVenvActive(v string) bool {
+	return len(v) > 0
 }
