@@ -26,3 +26,7 @@ func TestGetBranch(t *testing.T) {
 		t.Errorf("got: %s, want: %s", actual, expected)
 	}
 }
+
+func TestIsDirty(t *testing.T) {
+	fmt.Println(isDirty())
+}

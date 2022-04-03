@@ -2,7 +2,6 @@ package git
 
 import (
 	"bytes"
-	"fmt"
 	"os"
 	"os/exec"
 	"strings"
@@ -16,7 +15,6 @@ func (g *Git) Initialize() {
 func getBranch() string {
 	wd, err := os.Getwd()
 	if err != nil {
-		fmt.Println(err.Error())
 		return ""
 	}
 	cmd := exec.Command("git", "branch", "--show-current")
@@ -28,7 +26,6 @@ func getBranch() string {
 	err = cmd.Run()
 
 	if err != nil {
-		fmt.Println(err.Error())
 		return ""
 	}
 	name := out.String()
@@ -37,6 +34,7 @@ func getBranch() string {
 }
 
 func isDirty() bool {
+
 	wd, err := os.Getwd()
 	if err != nil {
 		return false
