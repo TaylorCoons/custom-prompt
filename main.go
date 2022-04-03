@@ -34,16 +34,23 @@ var funcMap = template.FuncMap{
 func main() {
 	// prompt_template := "colors-{{ format .Fg.Red }}red{{ format .Fg.LightRed }}light_red{{ format .Fg.NC }}\\$ "
 	// prompt_template := "\\u@\\h:\\w-'{{ format \"red\" }}{{ surroundWith (ellipse .Branch 10) \"[\" \"]\" }}{{ format \"nc\" }}'\\$ \n"
-	prompt_template := "test-{{ format .Format.Fg.Red .Format.Em.Underlined .Format.Em.Bold }}{{ .Git.Branch }}{{ format .Format.Fg.NC }}$"
+	// prompt_template := "test-{{ format .Format.Fg.Red .Format.Em.Underlined .Format.Em.Bold }}{{ .Git.Branch }}{{ format .Format.Fg.NC }}$"
 	opts := PromptOpts{}
 	opts.Git = new(git.Git)
 	opts.Git.Initialize()
 	opts.Format = new(format.Format)
 	opts.Format.Initialize()
 
-	t, err := template.New("ps1").Funcs(funcMap).Parse(prompt_template)
+	paths := []string{
+		"ps1.tmpl",
+	}
+
+	t, err := template.New("ps1.tmpl").Funcs(funcMap).ParseFiles(paths...)
 	if err != nil {
 		panic(err)
 	}
-	t.Execute(os.Stdout, opts)
+	err = t.Execute(os.Stdout, opts)
+	if err != nil {
+		panic(err)
+	}
 }
