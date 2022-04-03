@@ -1,0 +1,11 @@
+{{- format .Format.Fg.Green .Format.Em.Bold -}}
+\u@\h
+{{- format .Format.Fg.NC -}}
+:
+{{- format .Format.Fg.Blue .Format.Em.Bold -}}
+\w
+{{- format .Format.Fg.NC -}}
+{{- template "branch" . -}}
+{{- template "venv" . -}}
+{{- format .Format.Fg.Blue .Format.Em.Bold -}}
+\$ {{ format .Format.Fg.NC -}}

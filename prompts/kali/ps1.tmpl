@@ -1,0 +1,16 @@
+{{- format .Format.Fg.Cyan -}}
+┌──(
+{{- format .Format.Fg.Blue .Format.Em.Bold -}}
+\u@\h
+{{- format .Format.Fg.NC -}}
+{{- format .Format.Fg.Cyan -}}
+)-[
+{{- format .Format.Fg.White .Format.Em.Bold -}}
+\w
+{{- format .Format.Fg.NC -}}
+{{- format .Format.Fg.Cyan -}}
+]
+{{- template "branch" . -}}
+{{- template "venv" . -}}
+{{- format .Format.Fg.Cyan }}
+└─\$ {{ format .Format.Fg.NC -}}

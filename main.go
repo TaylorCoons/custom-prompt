@@ -44,15 +44,22 @@ func main() {
 	opts.Venv.Initialize()
 
 	paths := []string{
-		"/home/taylor/code/custom-prompt/kali.tmpl",
+		"/home/taylor/code/custom-prompt/prompts/ubuntu/ps1.tmpl",
+		"/home/taylor/code/custom-prompt/prompts/ubuntu/branch.tmpl",
+		"/home/taylor/code/custom-prompt/prompts/ubuntu/venv.tmpl",
 	}
-
-	t, err := template.New("kali.tmpl").Funcs(funcMap).ParseFiles(paths...)
+	// t := template.Must(template.ParseFiles(paths...)).Funcs(funcMap)
+	t, err := template.New("ps1.tmpl").Funcs(funcMap).ParseFiles(paths...)
 	if err != nil {
 		panic(err)
 	}
-	err = t.Execute(os.Stdout, opts)
-	if err != nil {
-		panic(err)
-	}
+	t.ExecuteTemplate(os.Stdout, "ps1.tmpl", opts)
+	// t, err := template.New("kali.tmpl").Funcs(funcMap).ParseFiles(paths...)
+	// if err != nil {
+	// 	panic(err)
+	// }
+	// err = t.Execute(os.Stdout, opts)
+	// if err != nil {
+	// 	panic(err)
+	// }
 }
