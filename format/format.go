@@ -29,7 +29,7 @@ func (f *Format) Initialize() {
 }
 
 func FormatChar(opts ...string) string {
-	return "\\033[" + strings.Join(opts, ";") + "m"
+	return "\\[\\033[" + strings.Join(opts, ";") + "m\\]"
 }
 
 func Ellipse(text string, length int) string {

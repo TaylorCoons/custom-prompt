@@ -42,7 +42,7 @@ func main() {
 	opts.Format.Initialize()
 
 	paths := []string{
-		"ps1.tmpl",
+		"/home/taylor/code/custom-prompt/ps1.tmpl",
 	}
 
 	t, err := template.New("ps1.tmpl").Funcs(funcMap).ParseFiles(paths...)

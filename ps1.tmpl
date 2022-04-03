@@ -1,2 +1,19 @@
-{{ $br := print (format .Format.Fg.Blue) (ellipse .Git.Branch 10) (format .Format.Fg.NC) }}
-test-{{ $br }}
+{{- format .Format.Fg.Green .Format.Em.Bold -}}
+\u@\h
+{{- format .Format.Fg.NC -}}
+:
+{{- format .Format.Fg.Blue .Format.Em.Bold -}}
+\w
+{{- format .Format.Fg.NC -}}
+{{- if .Git.Branch -}}
+[
+{{- if .Git.Dirty -}}
+{{- format .Format.Fg.Red -}}
+{{- else -}}
+{{- format .Format.Fg.Green -}}
+{{- end -}}
+{{- ellipse .Git.Branch 10 -}}
+{{- format .Format.Fg.NC -}}
+]
+{{- end -}} 
+\$ 
