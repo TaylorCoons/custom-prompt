@@ -2,9 +2,9 @@ package git
 
 import (
 	"bytes"
+	"fmt"
 	"os"
 	"os/exec"
-	"path/filepath"
 	"strings"
 )
 
@@ -16,10 +16,11 @@ func (g *Git) Initialize() {
 func getBranch() string {
 	wd, err := os.Getwd()
 	if err != nil {
+		fmt.Println(err.Error())
 		return ""
 	}
-	gitRepo := filepath.Join(wd, ".git")
-	cmd := exec.Command("git", "--git-dir", gitRepo, "branch", "--show-current")
+	cmd := exec.Command("git", "branch", "--show-current")
+	cmd.Dir = wd
 
 	var out bytes.Buffer
 	cmd.Stdout = &out
@@ -27,6 +28,7 @@ func getBranch() string {
 	err = cmd.Run()
 
 	if err != nil {
+		fmt.Println(err.Error())
 		return ""
 	}
 	name := out.String()
@@ -40,8 +42,8 @@ func isDirty() bool {
 		return false
 	}
 
-	gitRepo := filepath.Join(wd, ".git")
-	cmd := exec.Command("git", "--git-dir", gitRepo, "status", "--porcelain")
+	cmd := exec.Command("git", "status", "--porcelain")
+	cmd.Dir = wd
 
 	var out bytes.Buffer
 	cmd.Stdout = &out
@@ -51,8 +53,5 @@ func isDirty() bool {
 		return false
 	}
 	modified := out.String()
-	if len(modified) > 0 {
-		return true
-	}
-	return false
+	return len(modified) > 0
 }
