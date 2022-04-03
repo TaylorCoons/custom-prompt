@@ -6,6 +6,7 @@ import (
 
 	"github.com/taylorcoons/custom-prompt/format"
 	"github.com/taylorcoons/custom-prompt/git"
+	"github.com/taylorcoons/custom-prompt/venv"
 )
 
 type Opt interface {
@@ -15,6 +16,7 @@ type Opt interface {
 type PromptOpts struct {
 	Git    Opt
 	Format Opt
+	Venv   Opt
 }
 
 // TODOS:
@@ -38,6 +40,8 @@ func main() {
 	opts.Git.Initialize()
 	opts.Format = new(format.Format)
 	opts.Format.Initialize()
+	opts.Venv = new(venv.Venv)
+	opts.Venv.Initialize()
 
 	paths := []string{
 		"/home/taylor/code/custom-prompt/kali.tmpl",

@@ -22,5 +22,13 @@
 {{- format .Format.Fg.Cyan -}}
 )
 {{- end -}}
+{{- if .Venv.Active -}}
+{{- format .Format.Fg.Cyan -}}
+(
+{{- format .Format.Fg.LightGreen -}}
+env:{{- .Venv.Env -}}
+{{- format .Format.Fg.Cyan -}}
+)
+{{- end -}}
 {{- format .Format.Fg.Cyan }}
 └─\$ {{ format .Format.Fg.NC -}}
