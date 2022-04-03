@@ -42,10 +42,10 @@ func main() {
 	opts.Format.Initialize()
 
 	paths := []string{
-		"/home/taylor/code/custom-prompt/ps1.tmpl",
+		"/home/taylor/code/custom-prompt/kali.tmpl",
 	}
 
-	t, err := template.New("ps1.tmpl").Funcs(funcMap).ParseFiles(paths...)
+	t, err := template.New("kali.tmpl").Funcs(funcMap).ParseFiles(paths...)
 	if err != nil {
 		panic(err)
 	}
