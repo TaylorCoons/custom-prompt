@@ -6,6 +6,7 @@ import (
 
 	"github.com/taylorcoons/custom-prompt/format"
 	"github.com/taylorcoons/custom-prompt/git"
+	"github.com/taylorcoons/custom-prompt/time"
 	"github.com/taylorcoons/custom-prompt/venv"
 )
 
@@ -17,6 +18,7 @@ type PromptOpts struct {
 	Git    Opt
 	Format Opt
 	Venv   Opt
+	Time   Opt
 }
 
 // TODOS:
@@ -42,6 +44,8 @@ func main() {
 	opts.Format.Initialize()
 	opts.Venv = new(venv.Venv)
 	opts.Venv.Initialize()
+	opts.Time = new(time.Time)
+	opts.Time.Initialize()
 
 	// paths := []string{
 	// 	"/home/taylor/code/custom-prompt/prompts/ubuntu/ps1.tmpl",
