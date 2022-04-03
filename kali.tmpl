@@ -14,7 +14,7 @@
 {{- if .Git.Branch -}}
 (
 {{- if .Git.Dirty -}}
-{{- format .Format.Fg.Red -}}
+{{- format .Format.Fg.Yellow -}}
 {{- else -}}
 {{- format .Format.Fg.Green -}}
 {{- end -}}

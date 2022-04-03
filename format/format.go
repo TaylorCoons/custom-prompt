@@ -21,6 +21,7 @@ func (f *Format) Initialize() {
 	f.Fg.NC = string(NC)
 	f.Fg.Red = string(Red)
 	f.Fg.White = string(White)
+	f.Fg.Yellow = string(Yellow)
 
 	f.Em.Blinking = string(Blinking)
 	f.Em.Bold = string(Bold)
