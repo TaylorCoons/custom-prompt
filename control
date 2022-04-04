@@ -1,0 +1,9 @@
+Package: custom-prompt
+Version: VERSION_TAG
+Section: custom
+Priority: optional
+Architecture: all
+Essential: no
+Installed-Size: 1024
+Maintainer: taylorcoons
+Description: "Custom PS1 prompt with golang templates"

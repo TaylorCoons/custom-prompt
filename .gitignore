@@ -15,4 +15,7 @@
 # vendor/
 
 # Binary build file
-custom-prompt
+/custom-prompt*
+
+# Debian build output
+/deb
