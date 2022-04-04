@@ -89,6 +89,7 @@ func main() {
 	if err != nil {
 		fmt.Printf("[%sError: %ssee log in ~/.custom-prompt/log]\\$ ", format.FormatChar("31"), format.FormatChar("0"))
 		logger.Fatal(err)
+
 		os.Exit(1)
 	}
 }
