@@ -1,0 +1,10 @@
+{{- define "venv" -}}
+{{- if .Venv.Active -}}
+{{- format .Format.Fg.NC -}}
+[
+{{- format .Format.Fg.LightGreen -}}
+env:{{- .Venv.Env -}}
+{{- format .Format.Fg.NC -}}
+]
+{{- end -}}
+{{- end -}}
