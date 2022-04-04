@@ -1,14 +1,13 @@
 
 ## Installation
 
-Add custom-prompt to path if not in default paths
 ```bash
-PATH=$PATH:/path/to/custom-prompt
-```
-
-Set custom PS1 in bash
-```bash
+# Add to ~/.bashrc
+VIRTUAL_ENV_DISABLE_PROMPT=1
+PATH=$PATH:path/to/custom-prompt
 PROMPT_COMMAND='PS1=$(custom-prompt)'
+# Resource bash (run in cli)
+source ~/.bashrc
 ```
 
 Or run these in the cli (change your path still)
