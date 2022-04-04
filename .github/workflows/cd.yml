@@ -12,8 +12,13 @@ on:
 
 jobs:
 
-  build:
+  test:
     runs-on: ubuntu-latest
+    steps:
+    - uses: ./.github/workflows/test
+  deploy:
+    runs-on: ubuntu-latest
+    depends_on: test
     steps:
     - uses: actions/checkout@v3
       with:
