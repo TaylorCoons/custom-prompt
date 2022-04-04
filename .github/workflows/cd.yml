@@ -58,11 +58,18 @@ jobs:
     #       ${{ steps.changelog.outputs.CHANGE_LOG }}
     #     draft: false
     #     prerelease: false
+
+    - name: Packagename
+      id: packagename
+      run: |
+        echo "::set-output name=PACKAGE_NAME::$(
+          ./release_name.sh
+        )"
     - name: Upload binaries to release
       uses: svenstaro/upload-release-action@v2
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: "custom-prompt_*.deb"
+        file: ${{ steps.packagename.outputs.PACKAGE_NAME }}
         asset_name: custom-prompt
         tag: ${{ github.ref }}
         overwrite: true
