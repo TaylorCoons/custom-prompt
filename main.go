@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"log"
 	"os"
 	"path"
 	"text/template"
@@ -60,10 +61,34 @@ func run() error {
 	return nil
 }
 
+func SetupLogger() (*log.Logger, error) {
+	homeDir, err := os.UserHomeDir()
+	if err != nil {
+		return nil, fmt.Errorf("failed to get user home dir %v", err)
+	}
+	logDir := path.Join(homeDir, ".custom-prompt")
+	err = os.MkdirAll(logDir, os.ModePerm)
+	if err != nil {
+		return nil, fmt.Errorf("failed to make log directory %v", err)
+	}
+	logFile := path.Join(logDir, "log")
+	f, err := os.OpenFile(logFile, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+	if err != nil {
+		return nil, fmt.Errorf("failed to open log file %v", err)
+	}
+	logger := log.New(f, "custom-prompt: ", log.Ldate|log.Lshortfile|log.Ltime)
+	return logger, nil
+}
+
 func main() {
-	err := run()
+	logger, err := SetupLogger()
+	if err != nil {
+		fmt.Fprint(os.Stderr, err)
+	}
+	err = run()
 	if err != nil {
 		fmt.Printf("[%sError: %ssee log in ~/.custom-prompt/log]\\$ ", format.FormatChar("31"), format.FormatChar("0"))
+		logger.Fatal(err)
 		os.Exit(1)
 	}
 }
