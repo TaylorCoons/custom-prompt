@@ -39,25 +39,31 @@ func Initialize() *PromptOpts {
 	return &opts
 }
 
-func main() {
+func run() error {
 	promptPtr := flag.String("prompt", "ubuntu", "prompt template to load")
 	homeDir, err := os.UserHomeDir()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "failed to get user home dir")
-		fmt.Fprint(os.Stderr, err.Error())
+		return fmt.Errorf("failed to get user home dir %v", err)
 	}
 	promptBase := ".custom-prompt/prompts"
 	flag.Parse()
-	if len(*promptPtr) == 0 {
-		fmt.Fprintf(os.Stderr, "-prompt flag must be specified")
-	}
+
 	promptDir := path.Join(homeDir, promptBase, *promptPtr, "*")
 
 	opts := Initialize()
 
 	t, err := template.New("ps1.tmpl").Funcs(funcMap).ParseGlob(promptDir)
 	if err != nil {
-		panic(err)
+		return err
 	}
 	t.ExecuteTemplate(os.Stdout, "ps1.tmpl", opts)
+	return nil
+}
+
+func main() {
+	err := run()
+	if err != nil {
+		fmt.Printf("[%sError: %ssee log in ~/.custom-prompt/log]\\$ ", format.FormatChar("31"), format.FormatChar("0"))
+		os.Exit(1)
+	}
 }
