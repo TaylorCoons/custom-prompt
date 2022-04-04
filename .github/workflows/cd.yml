@@ -46,15 +46,24 @@ jobs:
     - name: Package
       run: ./package_deb.sh
 
-    - name: Create Release
-      id: create_release
-      uses: actions/create-release@latest
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    # - name: Create Release
+    #   id: create_release
+    #   uses: actions/create-release@latest
+    #   env:
+    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #   with:
+    #     tag_name: ${{ github.ref }}
+    #     release_name: Release ${{ github.ref }}
+    #     body: |
+    #       ${{ steps.changelog.outputs.CHANGE_LOG }}
+    #     draft: false
+    #     prerelease: false
+    - name: Upload binaries to release
+      uses: svenstaro/upload-release-action@v2
       with:
-        tag_name: ${{ github.ref }}
-        release_name: Release ${{ github.ref }}
-        body: |
-          ${{ steps.changelog.outputs.CHANGE_LOG }}
-        draft: false
-        prerelease: false
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: "custom-prompt_*.deb"
+        asset_name: custom-prompt
+        tag: ${{ github.ref }}
+        overwrite: true
+        body: ${{ steps.changelog.outputs.CHANGE_LOG }}
