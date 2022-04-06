@@ -17,6 +17,10 @@ Classic ubuntu style with git branch and python environment added:
 
 (See the template files for references [kali](./prompts/kali/))
 
+Multi-line kali inspired prompt with git branch and python environment added:
+
+![kali-example-screenshot](./docs/kali-example.png)
+
 ## Installation
 
 Download the deb file located in the github release
