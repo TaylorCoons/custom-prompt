@@ -1,6 +1,9 @@
 
 # Custom Prompt
 
+[![CI](https://github.com/TaylorCoons/custom-prompt/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/TaylorCoons/custom-prompt/actions/workflows/ci.yml)
+[![custom-prompt release (latest SemVer)](https://img.shields.io/github/v/release/taylorcoons/custom-prompt?sort=semver)](https://github.com/taylorcoons/custom-prompt/releases)
+
 A PS1 prompt generator using golang templates. This comes packaged with several default prompts that can be easily customized using the golang templates. Completely new prompts can also be built using the template format. The templates have certain data injected in them to be leveraged to display useful information in the PS1 prompt such as the git branch and python environment. 
 
 ## Predefined template examples:
