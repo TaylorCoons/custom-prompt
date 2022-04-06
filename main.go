@@ -8,6 +8,7 @@ import (
 	"path"
 	"text/template"
 
+	"github.com/taylorcoons/custom-prompt/copy"
 	"github.com/taylorcoons/custom-prompt/format"
 	"github.com/taylorcoons/custom-prompt/git"
 	"github.com/taylorcoons/custom-prompt/venv"
@@ -40,6 +41,21 @@ func Initialize() *PromptOpts {
 	return &opts
 }
 
+func loadDefaultTemplates(homeDir string, promptBase string) error {
+	defaultDir := "/etc/custom-prompt/prompts"
+	promptDir := path.Join(homeDir, promptBase)
+	if _, err := os.Stat(promptDir); os.IsNotExist(err) {
+		err := os.MkdirAll(promptDir, os.ModePerm)
+		if err != nil {
+			return fmt.Errorf("failed to create prompt directory: %v", err)
+		}
+		if err = copy.Dir(defaultDir, promptDir); err != nil {
+			return fmt.Errorf("failed to copy default prompts to home: %v", err)
+		}
+	}
+	return nil
+}
+
 func run() error {
 	promptPtr := flag.String("prompt", "ubuntu", "prompt template to load")
 	homeDir, err := os.UserHomeDir()
@@ -47,8 +63,11 @@ func run() error {
 		return fmt.Errorf("failed to get user home dir %v", err)
 	}
 	promptBase := ".custom-prompt/prompts"
-	flag.Parse()
+	if err = loadDefaultTemplates(homeDir, promptBase); err != nil {
+		return err
+	}
 
+	flag.Parse()
 	promptDir := path.Join(homeDir, promptBase, *promptPtr, "*")
 
 	opts := Initialize()
