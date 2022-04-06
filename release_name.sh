@@ -6,6 +6,6 @@ DEB_VERSION=$(echo $VERSION | sed 's/v//' | sed 's/\./-/2')
 GOARCH=amd64
 GOOS=linux
 
-DEB_FOLDER="custom-prompt_${DEB_VERSION}_${GOARCH}"
+DEB_FOLDER="custom-prompt_${DEB_VERSION}_${GOARCH}.deb"
 
 echo $DEB_FOLDER
