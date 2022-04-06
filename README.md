@@ -1,4 +1,22 @@
 
+# Custom Prompt
+
+A PS1 prompt generator using golang templates. This comes packaged with several default prompts that can be easily customized using the golang templates. Completely new prompts can also be built using the template format. The templates have certain data injected in them to be leveraged to display useful information in the PS1 prompt such as the git branch and python environment. 
+
+## Predefined template examples:
+
+### Ubuntu-Style
+
+(See the template files for references [ubunutu](./prompts/ubuntu/))
+
+Classic ubuntu style with git branch and python environment added:
+
+![ubuntu-example-screenshot](./docs/ubuntu-example.png)
+
+### Kali-Style
+
+(See the template files for references [kali](./prompts/kali/))
+
 ## Installation
 
 Download the deb file located in the github release
