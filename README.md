@@ -58,3 +58,9 @@ sudo apt remove custom-prompt
 ```
 
 Remove environment variables from ~/.bashrc
+
+## Future Ideas
+
+* Change release to use [GoReleaser](https://github.com/goreleaser/goreleaser-action) to support wider build platforms and brew formulaes
+* Create automated releases triggered off of merge to master instead of tags
+* Add a time format to the passed into the template
